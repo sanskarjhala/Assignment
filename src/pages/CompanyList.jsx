@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import CompanyCard from "../component/CompanyCArd";
+import CompanyCard from "../component/CompanyCard";
 import AddCompanyModel from "../component/AddCompanyModel";
 import axios from "axios";
 
