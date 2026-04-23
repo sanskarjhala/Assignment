@@ -2,7 +2,7 @@
 
 A full-stack web application where users can explore companies, view ratings, and add reviews. Built using **React (Frontend)** and **Node.js + Express + MongoDB (Backend)**.
 ---
-## 🚀 Features
+##  Features
 
 ### Company Management
 
@@ -43,7 +43,7 @@ A full-stack web application where users can explore companies, view ratings, an
 
 ---
 
-## 🛠 Tech Stack
+## Tech Stack
 
 ### Frontend
 
@@ -61,7 +61,7 @@ A full-stack web application where users can explore companies, view ratings, an
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 ```
 client/
@@ -166,7 +166,7 @@ GET /:companyId
 
 ---
 
-### 📌 Review APIs
+###  Review APIs
 
 #### ➤ Add Review
 
@@ -187,7 +187,7 @@ Body:
 
 ---
 
-#### ➤ Get Reviews by Company
+#### Get Reviews by Company
 
 ```http
 GET /company/:companyId/reviews
@@ -228,13 +228,13 @@ GET /company/:companyId/reviews
 
 ---
 
-## 🎯 How Star Rating Works
+## How Star Rating Works
 
 * Loop from 1 → 5
 * Compare with rating
 * Render:
-  * Filled star ⭐
-  * Empty star ☆
+  * Filled star 
+  * Empty star 
 
 ---
 
