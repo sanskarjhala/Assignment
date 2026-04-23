@@ -16,8 +16,10 @@ app.use(cors());
 app.post("/company", newCompany);
 app.get("/company", getAllCompany);
 app.post("/:companyId/reviews", addReview);
-app.get("/company/:companyId",getCompanyDEtials );
-
+app.get("/company/:companyId", getCompanyDEtials);
+app.get("/health", (req, res) => {
+  return res.status(200).json({ status: "Ok" });
+});
 mongoose
   .connect(process.env.DATABASE_URL)
   .then(() => {

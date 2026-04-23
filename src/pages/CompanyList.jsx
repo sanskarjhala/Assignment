@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import CompanyCard from "../component/CompanyCard";
 import AddCompanyModel from "../component/AddCompanyModel";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 export default function CompanyList({ onSelectCompany }) {
   const [companies, setCompanies] = useState([]);
@@ -29,6 +30,7 @@ export default function CompanyList({ onSelectCompany }) {
       setTotalPages(response?.data.totalPages);
     } catch (error) {
       console.log("Error fetching companies:", error);
+      toast.error("Could Not Fetch Compnies");
     }
   };
 
@@ -37,7 +39,9 @@ export default function CompanyList({ onSelectCompany }) {
   }, [page, city, sort]);
 
   const handleAddCompany = async (form) => {
+    const toastId = "add-company";
     try {
+      toast.loading("Adding.....", { id: toastId });
       const response = await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/company`,
         {
@@ -47,14 +51,12 @@ export default function CompanyList({ onSelectCompany }) {
           foundedOn: form.foundedOn,
         },
       );
-
       setShowModal(false);
+      toast.success("Company Added", { id: toastId });
       fetchCompanies();
     } catch (error) {
       console.log("Error adding company:", error);
-      if (error.response) {
-        alert(error.response.data.message);
-      }
+      toast.error("Failed to add company", { id: toastId });
     }
   };
 

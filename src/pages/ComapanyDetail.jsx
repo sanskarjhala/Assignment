@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Star from "../component/Star";
 import AddReviewModal from "../component/AddReviewModal";
+import toast from "react-hot-toast";
 
 function getAvgRating(reviews) {
   if (!reviews.length) return 0;
@@ -42,7 +43,7 @@ export default function CompanyDetail({ companyId, onBack }) {
   const [showModal, setShowModal] = useState(false);
   const [sort, setSort] = useState("Date");
 
-  const fetchCompany = async () => {
+  const getCompany = async () => {
     try {
       const response = await axios.get(
         `${import.meta.env.VITE_BACKEND_URL}/company/${companyId}`,
@@ -54,7 +55,7 @@ export default function CompanyDetail({ companyId, onBack }) {
   };
 
   useEffect(() => {
-    fetchCompany();
+    getCompany();
   }, [companyId]);
 
   if (!company) {
@@ -69,7 +70,9 @@ export default function CompanyDetail({ companyId, onBack }) {
   });
 
   const handleSaveReview = async (form) => {
+    const toastId = "saveReview";
     try {
+      toast.loading("Loading...", { id: toastId });
       await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/${companyId}/reviews`,
         {
@@ -80,7 +83,8 @@ export default function CompanyDetail({ companyId, onBack }) {
         },
       );
       setShowModal(false);
-      fetchCompany();
+      toast.success("Review Added", { id: toastId });
+      getCompany();
     } catch (error) {
       console.log("Error adding review:", error);
     }
